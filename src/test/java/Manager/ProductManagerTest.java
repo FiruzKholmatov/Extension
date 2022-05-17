@@ -17,7 +17,7 @@ class ProductManagerTest {
 
     @Test
 
-    public void shouldFindInNonEmptyCart() {
+    public void shouldSearchStringInNonEmptyCart() {
 
         ProductManager manager = new ProductManager();
 
@@ -35,5 +35,55 @@ class ProductManagerTest {
 
     }
 
+    @Test
 
+    public void shouldSearchStringInEmptyCart() {
+
+        ProductManager manager = new ProductManager();
+
+
+        Product[] actual = manager.searchBy("a");
+        Product[] expected = {};
+
+
+        assertArrayEquals(expected, actual);
+
+
+    }
+
+    @Test
+
+    public void shouldSearchUnknownStringInNonEmptyCart() {
+
+        ProductManager manager = new ProductManager();
+
+        manager.add(book1);
+        manager.add(smartphone);
+        manager.add(book2);
+        manager.add(book3);
+
+        Product[] actual = manager.searchBy("MySQL");
+        Product[] expected = {};
+
+
+        assertArrayEquals(expected, actual);
+
+
+    }
+
+    @Test
+
+    public void shouldSearchUnknownStringInEmptyCart() {
+
+        ProductManager manager = new ProductManager();
+
+
+        Product[] actual = manager.searchBy("MySQL");
+        Product[] expected = {};
+
+
+        assertArrayEquals(expected, actual);
+
+
+    }
 }
