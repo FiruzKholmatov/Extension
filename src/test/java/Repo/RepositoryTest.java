@@ -1,5 +1,6 @@
 package Repo;
 
+import Exceptions.NotFoundException;
 import org.junit.jupiter.api.Test;
 import domain.Book;
 import domain.Product;
@@ -100,5 +101,24 @@ class RepositoryTest {
         assertArrayEquals(expected, actual);
 
     }
+
+
+    @Test
+    void shouldThrowException() {
+        Repository repo = new Repository();
+
+        repo.add(book1);
+        repo.add(smartphone);
+        repo.add(book2);
+        repo.add(book3);
+
+        assertThrows(NotFoundException.class, () -> {
+            repo.removeById(666);
+        });
+
+
+    }
+
+
 
 }

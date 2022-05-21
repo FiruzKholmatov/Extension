@@ -1,5 +1,6 @@
 package Repo;
 
+import Exceptions.NotFoundException;
 import domain.Product;
 
 public class Repository {
@@ -26,8 +27,11 @@ public class Repository {
     }
 
     public Product[] removeById(int id) {
-
         Product[] tmp = new Product[products.length - 1];
+        if (findById(id) == null)
+            throw new NotFoundException(
+                    "Element with id: " + id + " not found"
+            );
         int index = 0;
         for (Product product : products)
             if (product.getId() != id) {
@@ -36,6 +40,15 @@ public class Repository {
             }
         products = tmp;
         return products;
+    }
+
+    public Product findById(int id) {
+        for (Product product : products) {
+            if (product.getId() == id) {
+                return product;
+            }
+        }
+        return null;
     }
 
 
